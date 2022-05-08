@@ -107,7 +107,6 @@ public class WeekViewAdapter extends FragmentStateAdapter {
             lastDate = calendar.getActualMaximum(Calendar.DATE);
             date += lastDate;
         }
-
         // 날짜 배열 초기화
         int[] daySeven = new int[7];
         for (int i=0; i<daySeven.length; i++) {
