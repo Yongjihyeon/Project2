@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
             // 옵션 메뉴에서 '주간' 클릭 시 WeekViewFragment를 띄워 주간 달력 보여줌
             case R.id.action_week:
-                getSupportFragmentManager().beginTransaction().add(R.id.main_container, new WeekViewFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new WeekViewFragment()).commit();
                 Toast.makeText(getApplicationContext(), "weekview", Toast.LENGTH_SHORT).show();
                 return true;
             default:

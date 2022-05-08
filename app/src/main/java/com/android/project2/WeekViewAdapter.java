@@ -4,7 +4,8 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import java.util.Calendar;
-
+//자바 calendar클래스로 연도, 날짜 월을 계산
+//그 계산한 값을 배열로 만들어 weekfragment로 인자를 전달해 weekfragment가 주간달력의 형태, 디자인을 구성
 public class WeekViewAdapter extends FragmentStateAdapter {
     private static final int NUM_ITEMS = 60;
     // 앱을 실행시킨 순간의 연도, 월, 날짜
@@ -80,6 +81,10 @@ public class WeekViewAdapter extends FragmentStateAdapter {
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, day);
 
+        // 입력받은 년,월,일로 달력을 설정한 뒤 요일을 구함
+        // 만약 요일이 일요일이 아니면 일요일로 설정해줌
+        // ex) 요일이 목요일(4)이면 (4-1=3)을 date로부터 빼줌
+        // 이렇게 해서 date가 그 주의 일요일로 설정
         int lastday = calendar.getActualMaximum(Calendar.DATE);
         //요일 설정
         day -= calendar.get(Calendar.DAY_OF_WEEK) - 1;
