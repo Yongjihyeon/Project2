@@ -1,5 +1,4 @@
 package com.android.project2;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -8,7 +7,7 @@ import java.util.Calendar;
 
 public class WeekViewAdapter extends FragmentStateAdapter {
     private static final int NUM_ITEMS = 60;
-    // 앱을 실행시킨 순간의 년도, 월, 날짜
+    // 앱을 실행시킨 순간의 연도, 월, 날짜
     private int year;
     private int month;
     private int day;
@@ -34,99 +33,91 @@ public class WeekViewAdapter extends FragmentStateAdapter {
 
         Calendar calendar = Calendar.getInstance();
         int lastday = calendar.getActualMaximum(Calendar.DATE);//이번달의 마지막날
-
-        // newyear, newmonth 현재 년도, 월로 초기화
+        // newyear, newmonth 현재 연도, 월로 초기화
         int newyear = year;
         int newmonth = month;
 
-        if ( newday > lastday ) { // newDate가 lastDate보다 크면 (예를 들어 오늘이 30일인데 7을 더해 newDate가 37이 되었다면)
-            // newDate가 lastDate보다 작아질 때까지 루프를 돌림
+        if ( newday > lastday ) {
+            // newday가 31또는 30일을 넘을경우=한달을 넘는다면
             while ( newday > lastday ) {
-                // newDate가 lastDate보다 크면 달을 늘린 뒤 마지막 날을 받아와 뺌
+                //newday가 마지막날보다 작아질때까지 다음달의 마지막날을 받아와 newday에서 뺀다
                 calendar.set(Calendar.YEAR, newyear);
                 calendar.set(Calendar.MONTH, newmonth);
                 lastday = calendar.getActualMaximum(Calendar.DATE);
                 newday -= lastday;
                 if ( newmonth == 11 ) {
                     newyear++;
-                    newmonth = 0;
-                } else {
+                    newmonth = 0; }
+                else
                     newmonth++;
-                }
             }
-        } else if ( newday < 1 ) { // newDate가 1보다 작을 경우 (페이지를 왼쪽으로 많이 넘겼을 경우)
-            // newDate가 1보다 커질 때까지 루프를 돌림
+        }
+        else if ( newday < 1 ) {
+            //스와이프 도중 newday가 1일보다 작을경우
             while ( newday < 1 ) {
-                // newDate가 0보다 작으면 달을 줄인 뒤 전월의 마지막 날을 더해줌
+                //newday가 1보다 커질때까지 이전달의 마지막날을 더해준다
                 if ( newmonth < 0 ) {
                     newyear--;
                     newmonth = 11;
-                } else {
-                    newmonth--;
                 }
+                else
+                    newmonth--;
                 calendar.set(Calendar.YEAR, newyear);
                 calendar.set(Calendar.MONTH, newmonth);
-                //int lastDateOfPrevMonth = calendar.getActualMaximum(Calendar.DATE);
                 newday += lastday;
             }
         }
-
-        // 설정된 newYear, newMonth, newDate를 바탕으로 날짜 배열을 생성
-        int[][] daySevenAndYearAndMonth = getSevenDaysAndYearAndMonth(newyear, newmonth, newday);
-
-        // 날짜 배열, 년, 월을 반환
-        return WeekFragment.newInstance(daySevenAndYearAndMonth[0], daySevenAndYearAndMonth[1][0], daySevenAndYearAndMonth[1][1]);
+        int[][] weekcalendar = getweek(newyear, newmonth, newday);
+        //연도, 월, 날짜를 인자로 전달
+        //weekclandarfragment에게 계산한 날짜값 전달
+        return WeekFragment.newInstance(weekcalendar[0], weekcalendar[1][0], weekcalendar[1][1]);
     }
 
-    // 년,월,일을 입력받아 해당하는 주간 날짜 배열을 생성하는 메소드
-    private int[][] getSevenDaysAndYearAndMonth(int year, int month, int date) {
+    // 연도,월,일을 입력받아 주간 날짜 배열 설정
+    private int[][] getweek(int year, int month, int day) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year); // 입력 받은 연도로 년 설정.
-        calendar.set(Calendar.MONTH, month); // 입력 받은 달로 월 설정.
-        calendar.set(Calendar.DAY_OF_MONTH, date);
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
 
-        // 입력받은 년,월,일로 달력을 설정한 뒤 요일을 구함
-        // 만약 요일이 일요일이 아니면 일요일로 설정해줌
-        // ex) 요일이 목요일(4)이면 (4-1=3)을 date로부터 빼줌
-        // 이렇게 해서 date가 그 주의 일요일로 설정
-        date -= calendar.get(Calendar.DAY_OF_WEEK) - 1;
-        int lastDate = calendar.getActualMaximum(Calendar.DATE);
+        int lastday = calendar.getActualMaximum(Calendar.DATE);
+        //요일 설정
+        day -= calendar.get(Calendar.DAY_OF_WEEK) - 1;
 
         // date 1보다 작을 때에 대한 설정
-        if ( date < 1 ) {
-            if ( month == 0 ) { // 1월이면
-                // year을 1 빼고 월을 12월로 설정
+        if ( day < 1 ) {
+            if ( month == 0 ) {//1월일경우
                 year--;
                 month = 11;
                 calendar.set(Calendar.YEAR, year);
-            } else { // 1월이 아니면 month에서 1을 뺌
-                month--;
             }
-            // 새롭게 설정된 year, month를 통해 Calendar를 설정한 후 date 얻음
+            else  // 1월이아닌 다른 월
+                month--;
+            // 새롭게 얻은 월로 calendar set
             calendar.set(Calendar.MONTH, month);
-            lastDate = calendar.getActualMaximum(Calendar.DATE);
-            date += lastDate;
+            lastday = calendar.getActualMaximum(Calendar.DATE);
+            day += lastday;
         }
         // 날짜 배열 초기화
-        int[] daySeven = new int[7];
-        for (int i=0; i<daySeven.length; i++) {
-            int d = date + i;
-            if ( d > lastDate ) {   // 날짜가 그 달의 마지막을 넘어설 경우 (30, 31, 32, ... 이런 식으로 커질 경우)
-                // 그 달의 마지막을 빼줌
-                d -= lastDate;
+        int[] dayseven = new int[7];
+        for (int i=0; i<dayseven.length; i++) {
+            int d = day + i;
+            if ( d > lastday ) {//30,31을 넘을 경우 지난 달의 마지막날에서 빼줌
+                d -= lastday;
             }
-            daySeven[i] = d;
+            dayseven[i] = d;
         }
 
-        // 배열과 연,월을 다 전달하기 위해 반환에 2차원 배열 형식 사용
+        // 배열과 연도,월을 다 전달하기 위해 반환에 2차원 배열 형식 사용
         return new int[][] {
-                daySeven,
+                dayseven,
                 new int[] {
                         year,
                         month
                 }
         };
     }
+
     @Override
     public int getItemCount() {
         return NUM_ITEMS;
