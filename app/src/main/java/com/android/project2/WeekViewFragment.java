@@ -1,4 +1,5 @@
 package com.android.project2;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -48,17 +49,17 @@ public class WeekViewFragment extends Fragment {
         // Inflate the layout for this fragment
 
         // fragment_week_view.xml의 ViewPager2 vpPagerWeek를 가져옴
-        ViewPager2 vpPager = rootView.findViewById(R.id.vpPagerWeek);
-        vpPager.post(new Runnable() {
+        ViewPager2 Page = rootView.findViewById(R.id.weekpage);
+        Page.post(new Runnable() {
             @Override
             public void run() {
-                // 시작 페이지를 50페이지로 설정 (왼쪽으로도 스와이프 할 수 있게 하기 위함)
-                vpPager.setCurrentItem(50, false);
+                // 시작 페이지를 30페이지로 설정 (왼쪽으로도 스와이프 할 수 있게 하기 위함)
+                Page.setCurrentItem(30, false);
             }
         });
         // MonthViewCalendarAdapter 어댑터 객체를 생성하여 vpPager의 어댑터로 설정
-        //FragmentStateAdapter adapter = new WeekViewCalendarAdapter(this);
-        //vpPager.setAdapter(adapter);
+        FragmentStateAdapter adapter = new WeekViewAdapter(this);
+        Page.setAdapter(adapter);
 
         return rootView;
     }

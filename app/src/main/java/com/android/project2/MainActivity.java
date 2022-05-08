@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // 옵션 메뉴에서 '월간' 클릭 시 MonthViewFragment를 띄워 월간 달력 보여줌
@@ -38,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
             // 옵션 메뉴에서 '주간' 클릭 시 WeekViewFragment를 띄워 주간 달력 보여줌
             case R.id.action_week:
-
                 getSupportFragmentManager().beginTransaction().add(R.id.main_container, new WeekViewFragment()).commit();
                 Toast.makeText(getApplicationContext(), "weekview", Toast.LENGTH_SHORT).show();
                 return true;
