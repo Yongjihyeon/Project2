@@ -165,13 +165,13 @@ public class WeekFragment extends Fragment {
 
         public View getView(int position, View convertView, ViewGroup parent) {
             // convertView는 그리드의 한 블락(하나의 뷰)
-            // calendar_week_gridview.xml파일을 View객체로 만들어서 반환.
+            // week_gridview.xml파일을 View객체로 만들어서 반환.
             if ( convertView == null ) convertView = inflater.inflate(R.layout.week_gridview, null);
-            // calendar_week_gridview 레이아웃 안의 week_tv_item_gridview TextView를 가져옴
+            // calendar_week_gridview 레이아웃 안의 week_item_gridview TextView를 가져옴
             TextView textView = (TextView) convertView.findViewById(R.id.item_gridview);
             // 그 TextView의 글자를 schedules 배열의 원소로 설정
             textView.setText(schedules[position]);
-            if ( position == 0 ) {  // 처음의 데이터를 넣는 중일 경우 배경색을 CYAN으로 설정 및 prevBlock에 이 블록 저장
+            if ( position == 0 ) {  // 처음의 데이터를 넣는 중일 경우 배경색을 CYAN으로 설정 및 Block에 이 블록 저장
                 textView.setBackgroundColor(Color.CYAN);
                 block = textView;
             }
