@@ -44,7 +44,7 @@ class GridAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.calendar_gridview, parent, false);
             // calendar_gridview.xml파일을 convertview 객체로 반환
             holder = new ViewHolder();// View를 담고 있는 ViewHolder 객체
-            holder.tvItemGridView = (TextView) convertView.findViewById(R.id.tv_item_gridview);
+            holder.tvItemGridView = (TextView) convertView.findViewById(R.id.item_gridview);
             // holder의 TextView객체에 calendar_gridview.xml의 텍스트뷰를 연결한다
             convertView.setTag(holder);
             // convertView하나마다의 태그에 둘을 연결하기위해 태그를 holder로 설정.

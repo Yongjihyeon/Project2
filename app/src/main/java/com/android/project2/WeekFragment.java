@@ -31,124 +31,101 @@ public class WeekFragment extends Fragment {
     //다른 block을 선택하면 이전의 block은 다시 흰색이 되기 때문에 이전의 블록을 block변수에 저장
 
     public WeekFragment() {
-
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            //다른 프래그먼트들로 받은 값으로 year, month값 초기화
+            //다른 프래그먼트로 부터 받은 year, month 초기화
             year = getArguments().getInt(ARG_PARAM1);
             month = getArguments().getInt(ARG_PARAM2);
 
-            // 날짜 배열 초기화 및 day1 ~ day7 인자들을 통해 내용 채워 넣음
+            // 주간 날짜 배열을 day1, 2,...,7을 통해 초기화한다.
             sevendays = new int[7];
             for (int i=0; i<sevendays.length; i++) {
                 sevendays[i] = getArguments().getInt("day" + (i+1));
             }
-
-            // schedules 배열 초기화 및 공백으로 채워넣음
-            // schedules 배열은 일주일에 각 24시간씩의 스케줄이 있으므로 7*24개
-            schedules = new String[7 * 24];
+            //schedule배열을 일주일에 24시간이므로 7*24=168개의 배열을만들고 공백으로 채움
+            schedules = new String[168];
             Arrays.fill(schedules, "");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        // fragment_month_calendar 레이아웃을 가지는 View 객체 생성
-        // fragment 내에서 findViewById 등의 액티비티 메소드를 이용하기 위함
-        View v = inflater.inflate(R.layout.fragment_week_calendar, container, false);
+        View view = inflater.inflate(R.layout.fragment_week, container, false);
 
         // 시간대, 스케줄을 둘 다 GridView를 통해 표현
         // schedules 배열을 바탕으로 ScheduleAdapter 어댑터 객체 생성
         // 스케줄 GridView에 ScheduleAdapter 어댑터를 설정
         // gridView는 fragment_week_calender의 schedule_grid
+
         ScheduleAdapter scheduleAdapter = new ScheduleAdapter(getActivity().getApplicationContext(), schedules);
-        GridView gridView = v.findViewById(R.id.schedule_grid);
+        GridView gridView = view.findViewById(R.id.schedule);
         gridView.setAdapter(scheduleAdapter);
 
         // TimeAdapter 어댑터 객체 생성
         // TimeAdapter에서는 자체적으로 시간대 배열(0~23의 숫자가 들어가있는 배열)을 생성하기 때문에 따로 파라미터로 배열을 넣어줄 필요가 없음
         // 시간대 GridView에 TimeAdapter 어댑터를 설정
         // gridView는 fragment_week_calender의 hour_grid
+        //0~23의 숫자가 있는 시간대 배열을 생성
         TimeAdapter timeAdapter = new TimeAdapter(getActivity().getApplicationContext());
-        GridView timeGridView = v.findViewById(R.id.hour_grid);
+        GridView timeGridView = view.findViewById(R.id.hour);
         timeGridView.setAdapter(timeAdapter);
 
-        // 스케줄 블록을 선택할 경우 토스트 메시지를 띄우고 배경색을 CYAN으로 변경하는 이벤트 리스너 추가
+        // 블록을 클릭하면 토스트메세지와 배경색변경
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                // 배경색을 바꾸기 위해 눌린 view로부터 TextView 가져옴
-                TextView textView = (TextView) view.findViewById(R.id.tv_item_gridview);
-                // 가져온 TextView (눌린 TextView)의 배경색을 CYAN으로 설정
+                TextView textView = (TextView) view.findViewById(R.id.item_gridview);
+                //view에서 클릭된 text를 가져온다
                 textView.setBackgroundColor(Color.CYAN);
-                // 이전에 선택된 블록의 배경색을 흰색으로 변경
+                //가져온 text부분 배경색을 cyan으로 변경하고 이전에 선택한 블록은 원상태인 흰색으로 변경한다
                 block.setBackgroundColor(Color.WHITE);
-                // prevBlock을 방금 눌렸던 블록으로 설정
                 block = textView;
-
-//                int day = daySeven[position % 7];
-//                int hour = position / 7;
-//                int x = position % 7;
-//                int y = position / 7;
-//                String message = day + "일 " + hour + "시 / position=(" + x + "," + y + ")";
-
-                // "position=(눌린 블록의 x좌표)" 형태로 출력
                 Toast.makeText(getActivity(), "position=" + (position % 7), Toast.LENGTH_SHORT).show();
             }
         });
 
         // 날짜들이 저장될 TextView 7개
         TextView[] textViews = {
-                v.findViewById(R.id.week_1),
-                v.findViewById(R.id.week_2),
-                v.findViewById(R.id.week_3),
-                v.findViewById(R.id.week_4),
-                v.findViewById(R.id.week_5),
-                v.findViewById(R.id.week_6),
-                v.findViewById(R.id.week_7)
+                view.findViewById(R.id.week1),
+                view.findViewById(R.id.week2),
+                view.findViewById(R.id.week3),
+                view.findViewById(R.id.week4),
+                view.findViewById(R.id.week5),
+                view.findViewById(R.id.week6),
+                view.findViewById(R.id.week7)
         };
 
-        // 앱바 타이틀 변경
-        ((MainActivity) getActivity()).setTitle(year + "년 " + (month + 1) + "월");
+        // 앱바타이틀을 현재 월로 변경함
+        getActivity().setTitle(year + "년 " + (month + 1) + "월");
 
-        // 날짜를 선택했을 시 이전에 선택했던 블록의 배경색을 흰색으로 바뀌게 하기 위한 배열
+        // 이전에 선택했던 블록의 배경색을 흰색으로 바뀌게 하기 위한 배열
         // 이벤트 리스너로 만들 익명 클래스에서는 final 타입의 변수만 이용 가능하기에, 1개짜리 배열 생성
-        final TextView[] prevSelectedColumn = { textViews[0] };
-        // 첫 날짜의 배경색을 CYAN으로 설정
-        prevSelectedColumn[0].setBackgroundColor(Color.CYAN);
+        final TextView[] preselect = { textViews[0] };
+        // 매월 첫날짜의 배경을 cyan으로 설정해둠
+        preselect[0].setBackgroundColor(Color.CYAN);
 
         for (int i=0; i<sevendays.length; i++) {
-            final int idx = i;
+            final int index = i;
             // 날짜 설정
             textViews[i].setText("" + sevendays[i]);
-            // 날짜 클릭 이벤트 리스너 설정
-            textViews[i].setOnClickListener(new View.OnClickListener() {
-                @Override
+            textViews[i].setOnClickListener(new View.OnClickListener() {//날짜 클릭
                 public void onClick(View view) {
-                    // "position=(눌린 x좌표)" 형태의 토스트 메시지 출력
-                    Toast.makeText(getActivity(), "position=" + idx, Toast.LENGTH_SHORT).show();
-                    // 눌린 TextView의 배경색을 CYAN으로 설정
-                    textViews[idx].setBackgroundColor(Color.CYAN);
-                    // 이전에 선택된 블록의 색을 흰색으로 변경
-                    prevSelectedColumn[0].setBackgroundColor(Color.WHITE);
-                    // prevSelectedColumn의 값을 방금 눌린 블록으로 변경
-                    prevSelectedColumn[0] = textViews[idx];
+                    Toast.makeText(getActivity(), "position=" + index, Toast.LENGTH_SHORT).show();
+                    //눌린 포지션 토스트 메세지 출력
+                    textViews[index].setBackgroundColor(Color.CYAN);
+                    preselect[0].setBackgroundColor(Color.WHITE);
+                    preselect[0] = textViews[index];
                 }
             });
         }
-
-//        return inflater.inflate(R.layout.fragment_month_calendar, container, false);
-        return v;
+        return view;
     }
 
     // newInstance 메소드에서는 파라미터로 주간 달력의 날짜 7개, 년, 월 정보를 입력 받음
     public static WeekFragment newInstance(int[] daySeven, int year, int month) {
-        // 새로운 WeekCalendarFragment fragment 객체 생성
         WeekFragment fragment = new WeekFragment();
 
         Bundle args = new Bundle();
@@ -178,7 +155,6 @@ public class WeekFragment extends Fragment {
             this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
-        // 배열 크기 반환
         @Override
         public int getCount() {
             return schedules.length;
@@ -199,7 +175,7 @@ public class WeekFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             // convertView는 그리드의 한 블락(하나의 뷰)
             // calendar_week_gridview.xml파일을 View객체로 만들어서 반환.
-            if ( convertView == null ) convertView = inflater.inflate(R.layout.calendar_week_gridview, null);
+            if ( convertView == null ) convertView = inflater.inflate(R.layout.week_gridview, null);
             // calendar_week_gridview 레이아웃 안의 week_tv_item_gridview TextView를 가져옴
             TextView textView = (TextView) convertView.findViewById(R.id.item_gridview);
             // 그 TextView의 글자를 schedules 배열의 원소로 설정
@@ -246,14 +222,14 @@ public class WeekFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             // convertView는 그리드의 한 블락(하나의 뷰)
             // schedule_time_gridview.xml파일을 View객체로 만들어서 반환.
-            if ( convertView == null ) convertView = inflater.inflate(R.layout.schedule_time_gridview, null);
+            if ( convertView == null ) convertView = inflater.inflate(R.layout.schedule_gridview, null);
             // schedule_time_gridview 레이아웃 안의 schedule_time_gridview TextView를 가져옴
-            TextView textView = (TextView) convertView.findViewById(R.id.schedule_time);
+            TextView textView = (TextView) convertView.findViewById(R.id.timeschedule);
             // TextView를 해당 시간대로 설정
             textView.setText(times[position]);
             return convertView;
         }
     }
 
-
 }
+

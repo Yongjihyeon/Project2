@@ -12,9 +12,12 @@
         <entry key="app/src/main/res/layout/calendar_gridview.xml" value="0.396875" />
         <entry key="app/src/main/res/layout/calendar_week_gridview.xml" value="0.396875" />
         <entry key="app/src/main/res/layout/fragment_month_view.xml" value="0.21354166666666666" />
+        <entry key="app/src/main/res/layout/fragment_week.xml" value="0.396875" />
         <entry key="app/src/main/res/layout/fragment_week_calendar.xml" value="0.396875" />
         <entry key="app/src/main/res/layout/fragment_week_view.xml" value="0.396875" />
+        <entry key="app/src/main/res/layout/schedule_gridview.xml" value="0.396875" />
         <entry key="app/src/main/res/layout/schedule_time_gridview.xml" value="0.396875" />
+        <entry key="app/src/main/res/layout/week_gridview.xml" value="0.396875" />
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.396875" />
       </map>
     </option>
