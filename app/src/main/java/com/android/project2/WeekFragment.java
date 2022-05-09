@@ -55,19 +55,10 @@ public class WeekFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_week, container, false);
 
-        // 시간대, 스케줄을 둘 다 GridView를 통해 표현
-        // schedules 배열을 바탕으로 ScheduleAdapter 어댑터 객체 생성
-        // 스케줄 GridView에 ScheduleAdapter 어댑터를 설정
-        // gridView는 fragment_week_calender의 schedule_grid
-
         ScheduleAdapter scheduleAdapter = new ScheduleAdapter(getActivity().getApplicationContext(), schedules);
         GridView gridView = view.findViewById(R.id.schedule);
         gridView.setAdapter(scheduleAdapter);
 
-        // TimeAdapter 어댑터 객체 생성
-        // TimeAdapter에서는 자체적으로 시간대 배열(0~23의 숫자가 들어가있는 배열)을 생성하기 때문에 따로 파라미터로 배열을 넣어줄 필요가 없음
-        // 시간대 GridView에 TimeAdapter 어댑터를 설정
-        // gridView는 fragment_week_calender의 hour_grid
         //0~23의 숫자가 있는 시간대 배열을 생성
         TimeAdapter timeAdapter = new TimeAdapter(getActivity().getApplicationContext());
         GridView timeGridView = view.findViewById(R.id.hour);
