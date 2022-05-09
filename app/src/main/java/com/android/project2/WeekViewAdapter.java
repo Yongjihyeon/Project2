@@ -81,10 +81,6 @@ public class WeekViewAdapter extends FragmentStateAdapter {
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, day);
 
-        // 입력받은 년,월,일로 달력을 설정한 뒤 요일을 구함
-        // 만약 요일이 일요일이 아니면 일요일로 설정해줌
-        // ex) 요일이 목요일(4)이면 (4-1=3)을 date로부터 빼줌
-        // 이렇게 해서 date가 그 주의 일요일로 설정
         int lastday = calendar.getActualMaximum(Calendar.DATE);
         //요일 설정
         day -= calendar.get(Calendar.DAY_OF_WEEK) - 1;
