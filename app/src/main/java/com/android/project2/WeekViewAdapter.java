@@ -70,7 +70,7 @@ public class WeekViewAdapter extends FragmentStateAdapter {
         }
         int[][] weekcalendar = getweek(newyear, newmonth, newday);
         //연도, 월, 날짜를 인자로 전달
-        //weekclandarfragment에게 계산한 날짜값 전달
+        //weekfragment에게 계산한 날짜값 전달
         return WeekFragment.newInstance(weekcalendar[0], weekcalendar[1][0], weekcalendar[1][1]);
     }
 

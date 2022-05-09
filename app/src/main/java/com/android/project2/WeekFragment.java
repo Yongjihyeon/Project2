@@ -68,7 +68,7 @@ public class WeekFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                TextView textView = (TextView) view.findViewById(R.id.item_gridview);
+                TextView textView = (TextView) view.findViewById(R.id.week_gridview);
                 //view에서 클릭된 text를 가져온다
                 textView.setBackgroundColor(Color.CYAN);
                 //가져온 text부분 배경색을 cyan으로 변경하고 이전에 선택한 블록은 원상태인 흰색으로 변경한다
@@ -168,7 +168,7 @@ public class WeekFragment extends Fragment {
             // week_gridview.xml파일을 View객체로 만들어서 반환.
             if ( convertView == null ) convertView = inflater.inflate(R.layout.week_gridview, null);
             // calendar_week_gridview 레이아웃 안의 week_item_gridview TextView를 가져옴
-            TextView textView = (TextView) convertView.findViewById(R.id.item_gridview);
+            TextView textView = (TextView) convertView.findViewById(R.id.week_gridview);
             // 그 TextView의 글자를 schedules 배열의 원소로 설정
             textView.setText(schedules[position]);
             if ( position == 0 ) {  // 처음의 데이터를 넣는 중일 경우 배경색을 CYAN으로 설정 및 Block에 이 블록 저장

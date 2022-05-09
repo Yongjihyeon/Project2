@@ -6,7 +6,7 @@
 
     <TextView
         android:gravity="center_horizontal"
-        android:id="@+id/item_gridview"
+        android:id="@+id/week_gridview"
         android:layout_width="match_parent"
         android:layout_height="57dp"
         android:textSize="20sp"
@@ -14,3 +14,4 @@
         />
 
 </LinearLayout>
+
