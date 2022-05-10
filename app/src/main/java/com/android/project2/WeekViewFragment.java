@@ -50,11 +50,12 @@ public class WeekViewFragment extends Fragment {
         Page.post(new Runnable() {
             @Override
             public void run() {
-                // 전체 페이지는 60 시작 페이지르르 30으로 = 양쪽으로 스와이프 하기위해
+                //객체의 현재 페이지를 설정=30
+                // 전체 페이지는 60 시작 페이지를 30으로 = 양쪽으로 스와이프 하기위해
                 Page.setCurrentItem(30, false);
             }
         });
-        // MonthViewCalendarAdapter 어댑터 객체를 생성하여 어댑터로 설정
+        // WeekViewCalendarAdapter 어댑터 객체를 생성하여 어댑터로 설정
         FragmentStateAdapter adapter = new WeekViewAdapter(this);
         Page.setAdapter(adapter);
 
