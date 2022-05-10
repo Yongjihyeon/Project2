@@ -54,7 +54,8 @@ public class WeekFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_week, container, false);
-
+        // 스케줄 Gridㅍiew의 Adapter 어댑터 설정
+        // gridView는 fragment_week_calender의 schedule_grid
         ScheduleAdapter scheduleAdapter = new ScheduleAdapter(getActivity().getApplicationContext(), schedules);
         GridView gridView = view.findViewById(R.id.schedule);
         gridView.setAdapter(scheduleAdapter);
@@ -94,7 +95,9 @@ public class WeekFragment extends Fragment {
 
         // 이전에 선택했던 블록의 배경색을 흰색으로 바뀌게 하기 위한 배열
         // 이벤트 리스너로 만들 익명 클래스에서는 final 타입의 변수만 이용 가능하기에, 1개짜리 배열 생성
-        final TextView[] preselect = { textViews[0] };
+        final TextView[] preselect = {
+                textViews[0]
+        };
         // 매월 첫날짜의 배경을 cyan으로 설정해둠
         preselect[0].setBackgroundColor(Color.CYAN);
 
@@ -106,9 +109,9 @@ public class WeekFragment extends Fragment {
                 public void onClick(View view) {
                     Toast.makeText(getActivity(), "position=" + index, Toast.LENGTH_SHORT).show();
                     //눌린 포지션 토스트 메세지 출력
-                    textViews[index].setBackgroundColor(Color.CYAN);
-                    preselect[0].setBackgroundColor(Color.WHITE);
-                    preselect[0] = textViews[index];
+                    textViews[index].setBackgroundColor(Color.CYAN);//클릭된 텍스트뷰 배경색 변경
+                    preselect[0].setBackgroundColor(Color.WHITE);//이전에 클릭된 텍스트뷰 배경색 흰색변경
+                    preselect[0] = textViews[index];//preselect값을 방금 누른 텍스트뷰로 변경
                 }
             });
         }
@@ -118,7 +121,6 @@ public class WeekFragment extends Fragment {
     // newInstance 메소드에서는 파라미터로 주간 달력의 날짜 7개, 년, 월 정보를 입력 받음
     public static WeekFragment newInstance(int[] daySeven, int year, int month) {
         WeekFragment fragment = new WeekFragment();
-
         Bundle args = new Bundle();
         // fragment에 아까 전달받은 날짜 배열을 day1, day2, ..., day7 형태로 전달
         for (int i=0; i<daySeven.length; i++) {
@@ -131,6 +133,7 @@ public class WeekFragment extends Fragment {
         return fragment;
     }
 
+    //------------------schedule adapter------------------
     // 스케줄 GridView의 데이터를 채워넣기 위한 GridAdapter 내부클래스
     private class ScheduleAdapter extends BaseAdapter {
 
@@ -171,6 +174,7 @@ public class WeekFragment extends Fragment {
             TextView textView = (TextView) convertView.findViewById(R.id.week_gridview);
             // 그 TextView의 글자를 schedules 배열의 원소로 설정
             textView.setText(schedules[position]);
+            //---처음 설정을 첫인덱스의 배경을 cyan색, 이전블록변수에 값 저장---
             if ( position == 0 ) {  // 처음의 데이터를 넣는 중일 경우 배경색을 CYAN으로 설정 및 Block에 이 블록 저장
                 textView.setBackgroundColor(Color.CYAN);
                 block = textView;
@@ -180,6 +184,7 @@ public class WeekFragment extends Fragment {
         }
     }
 
+    //----------------time adapter----------------
     // 시간대 GridView의 데이터를 채워넣기 위한 GridAdapter 내부클래스
     private class TimeAdapter extends BaseAdapter {
 
@@ -189,7 +194,7 @@ public class WeekFragment extends Fragment {
         private LayoutInflater inflater;
 
         public TimeAdapter(Context context) {
-            // 시간대 배열 직접 설정 (0~23의 숫자 입력)
+            //------0~23숫자 넣기------------
             this.times = new String[24];
             for (int i=0; i<times.length; i++) times[i] = "" + i;
             this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -212,9 +217,9 @@ public class WeekFragment extends Fragment {
 
         public View getView(int position, View convertView, ViewGroup parent) {
             // convertView는 그리드의 한 블락(하나의 뷰)
-            // schedule_time_gridview.xml파일을 View객체로 만들어서 반환.
+            // schedule_gridview.xml파일을 View객체로 만들어서 반환.
             if ( convertView == null ) convertView = inflater.inflate(R.layout.schedule_gridview, null);
-            // schedule_time_gridview 레이아웃 안의 schedule_time_gridview TextView를 가져옴
+            // schedule_gridview 레이아웃 안의 timeschedule TextView를 가져옴
             TextView textView = (TextView) convertView.findViewById(R.id.timeschedule);
             // TextView를 해당 시간대로 설정
             textView.setText(times[position]);
