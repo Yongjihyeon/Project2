@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // 앱이 실행되면 기본적으로 MonthViewFragment를 보여줌
-        getSupportFragmentManager().beginTransaction().add(R.id.main_container, new MonthViewFragment()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.main_container, new WeekViewFragment()).commit();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
