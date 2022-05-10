@@ -1,5 +1,4 @@
 package com.android.project2;
-
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -30,7 +29,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-
 public class MonthViewFragment extends Fragment {
     static GridAdapter adapter;
     private Calendar mCalendar;
@@ -43,7 +41,6 @@ public class MonthViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_month_view, container, false);
-
         GridView gridview = (GridView) v.findViewById(R.id.gridview);
 
         long now = System.currentTimeMillis();//오늘 날짜 설정
@@ -53,7 +50,6 @@ public class MonthViewFragment extends Fragment {
         final SimpleDateFormat curYearFormat = new SimpleDateFormat("yyyy", Locale.KOREA);
         final SimpleDateFormat curMonthFormat = new SimpleDateFormat("MM", Locale.KOREA);
         final SimpleDateFormat curDayFormat = new SimpleDateFormat("dd", Locale.KOREA);
-
         Calendar calendar = Calendar.getInstance();
 
         //mCalendar = Calendar.getInstance();

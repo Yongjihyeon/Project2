@@ -27,7 +27,6 @@ public class WeekViewAdapter extends FragmentStateAdapter {
     public WeekFragment createFragment(int position) {
         // 시작 포지션은 전체 60페이지중 30뻔째 페이지(양옆으로 스와이프 되기때문)
         position -= NUM_ITEMS/2;
-
         // 시작 일자인 newday 변수를 오늘 일자에서 position*7을 더한 값으로 설정
         //다음 페이지로 넘길때 7일씩 더해진 날짜가 보이도록..
         int newday = day + (position * 7);
@@ -74,7 +73,7 @@ public class WeekViewAdapter extends FragmentStateAdapter {
         return WeekFragment.newInstance(weekcalendar[0], weekcalendar[1][0], weekcalendar[1][1]);
     }
 
-    // 연도,월,일을 입력받아 주간 날짜 배열 설정
+    // --------getweeek 연도,월,일을 입력받아 주간 날짜 배열 설정----------
     private int[][] getweek(int year, int month, int day) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
@@ -109,7 +108,7 @@ public class WeekViewAdapter extends FragmentStateAdapter {
             dayseven[i] = d;
         }
 
-        // 배열과 연도,월을 다 전달하기 위해 반환에 2차원 배열 형식 사용
+        // 배열,연도,월을 전달하기 위해 반환에 2차원 배열 형식 사용
         return new int[][] {
                 dayseven,
                 new int[] {
