@@ -31,7 +31,7 @@ public class MonthViewAdapter extends FragmentStateAdapter {
         //month를 12월에서 오른쪽으로 스와이프 한 경우
         if (curMonth > 11) {
             curYear += 1;
-            curMonth = 1;
+            curMonth = 0;
         }
         //month를 1월에서 왼쪽으로 스와이프 한 경우
         if (curMonth < 0) {
