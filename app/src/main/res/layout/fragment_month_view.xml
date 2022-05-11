@@ -3,83 +3,82 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/text_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#8BC34A"
+            android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/list_item_padding"
+                    android:text="일"
+                    android:textColor="#FF0000"
+                    android:textSize="15dp" />
 
-    <LinearLayout
-        android:id="@+id/text_calendar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#8BC34A"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="@dimen/list_item_padding"
-            android:text="일"
-            android:textColor="#FF0000"
-            android:textSize="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/list_item_padding"
+                    android:text="월"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="@dimen/list_item_padding"
-            android:text="월"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/list_item_padding"
+                    android:text="화"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="@dimen/list_item_padding"
-            android:text="화"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/list_item_padding"
+                    android:text="수"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="@dimen/list_item_padding"
-            android:text="수"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/list_item_padding"
+                    android:text="목"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="@dimen/list_item_padding"
-            android:text="목"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/list_item_padding"
+                    android:text="금"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="@dimen/list_item_padding"
-            android:text="금"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="@dimen/list_item_padding"
-            android:text="토"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/list_item_padding"
+                    android:text="토"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+        </LinearLayout>
         <GridView
             android:id="@+id/gridview"
             android:layout_width="match_parent"
