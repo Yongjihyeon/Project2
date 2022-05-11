@@ -45,6 +45,7 @@ public class MonthViewFragment extends Fragment {
     int month; //현재 월
     LinearLayout ll;    //ll gridview를 감싸고 있는 Linearlayout
     int h;
+    int hh;
     int w;
     DisplayMetrics dm;  // 화면의 크기를 받아오는 변수 선언
     private TextView block; //이전에 선택된 textview를 저장하는 변수
@@ -56,10 +57,11 @@ public class MonthViewFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_month_view, container, false);
         //화면에 대한 크기 정보를 받아옴
         dm = getActivity().getApplicationContext().getResources().getDisplayMetrics();
+        h = dm.heightPixels;
         w = dm.widthPixels;
         //Linearlayout의 높이를 받아와 h에 저장 (px단위)
-        ll = (LinearLayout) v.findViewById(R.id.layout_size);
-        h=ll.getHeight();
+        ll = (LinearLayout) v.findViewById(R.id.text_calendar);
+        hh = ll.getHeight();
 
         GridView gridview = (GridView) v.findViewById(R.id.gridview);
 
@@ -183,7 +185,7 @@ public class MonthViewFragment extends Fragment {
             holder.tvItemGridView.setTextColor(color);
 
             //각 textview의 높이와 폭 설정
-            holder.tvItemGridView.setHeight((h/7));
+            holder.tvItemGridView.setHeight(((h-hh)/7));
             holder.tvItemGridView.setWidth(w/7);
 
             //block 초기화
