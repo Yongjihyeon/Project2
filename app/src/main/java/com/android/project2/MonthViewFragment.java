@@ -45,8 +45,8 @@ public class MonthViewFragment extends Fragment {
     int lastday; //달의 마지막 날짜
     int year; //현재 년도
     int month; //현재 월
-    int h;
-    int w;
+    int h;  //gridview를 구성하는 textview 높이 설정
+    int w;  //gridview를 구성하는 textview 폭 설정
     DisplayMetrics dm;  // 화면의 크기를 받아오는 변수 선언
     private TextView block; //이전에 선택된 textview를 저장하는 변수
     ArrayList<String> daylist;//날짜 저장 리스트
@@ -55,6 +55,7 @@ public class MonthViewFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            //프래그먼트가 생성됐을 때 전달받은 변수 초기화
             year = getArguments().getInt(ARG_PARAM1);
             month = getArguments().getInt(ARG_PARAM2);
         }
@@ -81,12 +82,11 @@ public class MonthViewFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
 
         mCalendar = Calendar.getInstance();
-        //만약 이전 액티비가 없다면 그냥 현재 연도, 월 정보 가져오기
         mCalendar.set(year,month,1);
 
         daylist = new ArrayList<String>();
         setCalendar(year, month); //daylist를 초기화 히면서 year, month 정보를 넣는다.
-        ;
+
         int dayNum = mCalendar.get(Calendar.DAY_OF_WEEK);
         for (int i = 1; i < dayNum; i++) {//매달 1일과 요일을 일치시키기위한 공백 추가
             daylist.add("");

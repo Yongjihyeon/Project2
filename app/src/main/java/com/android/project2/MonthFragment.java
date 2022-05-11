@@ -54,6 +54,7 @@ public class MonthFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View vp = inflater.inflate(R.layout.fragment_month, container, false);
+        //viewpager2 객체를 받아옴
         ViewPager2 vpPager = vp.findViewById(R.id.vpPager);
         vpPager.post(new Runnable() {
             @Override
@@ -63,6 +64,7 @@ public class MonthFragment extends Fragment {
                 vpPager.setCurrentItem(30, false);
             }
         });
+        //어댑터 연결
         FragmentStateAdapter adapter = new MonthViewAdapter(this);
         vpPager.setAdapter(adapter);
         return vp;
